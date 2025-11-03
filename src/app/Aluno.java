@@ -15,7 +15,7 @@ public class Aluno {
     String situacao;
 
     //Construtor
-    public Aluno(String nome, Data dataNascimento, int idade, Sexo sexo, String matricula, String curso, String periodo, double media) {
+    public Aluno(String nome, Data dataNascimento, Sexo sexo, String matricula, String curso, String periodo, double media) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.idade = calcularIdade(dataNascimento);
@@ -56,20 +56,21 @@ public class Aluno {
 
     public String coloredSituacao(String situacao){
         if(this.situacao == "Aprovado") {
-            return "<html>" + "<font color=\"green\">" + situacao + "</font></html>";
+            return "<font color=\"green\">" + situacao + "</font>";
         } else if (this.situacao == "Final") {
-            return "<html>" + "<font color=\"yellow\">" + situacao + "</font></html>";
+            return "<font color=\"orange\">" + situacao + "</font>";
         } else {
-            return "<html>" + "<font color=\"red\">" + situacao + "</font></html>";
+            return "<font color=\"red\">" + situacao + "</font>";
         }
 
     }
 
-    public String toString(Aluno aluno){
+    public String toString(){
         String mensagem = "(" + this.matricula + ") " + this.nome
-                        + "\\nData de Nascimento: " + this.dataNascimento.getDataFormatada() + " - " + this.idade + " anos" + "Sexo: " + this.sexo
-                        + "\nCurso: " + this.curso
-                        + "\nMédia: " + this.media + "Situação: " + coloredSituacao(this.situacao);
+                        + "<br>Data de Nascimento: " + this.dataNascimento.getDataFormatada() 
+                        + "<br>Sexo: " + this.sexo
+                        + "<br>Curso: " + this.curso
+                        + "<br>Média: " + this.media + " - " + coloredSituacao(this.situacao);
         return mensagem;
     }
 }
