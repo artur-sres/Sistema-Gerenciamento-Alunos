@@ -2,16 +2,20 @@ package app;
 import java.time.LocalDate;
 
 public class Data {
-    String dataFormatada;
-    int dia;
-    int mes;
-    int ano;
+    private String dataFormatada;
+    private int dia;
+    private int mes;
+    private int ano;
 
     public Data(int dia, int mes, int ano) {
         this.dia = dia;
         this.mes = mes;
         this.ano = ano;
         this.dataFormatada = dia + "/" + mes + "/" + ano;
+    }
+
+    public String getDataFormatada() {
+        return dataFormatada;
     }
 
     public static int calcularIdade(Data dataNascimento) {
