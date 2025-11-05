@@ -13,9 +13,9 @@ public class App {
         }
 
         GerenciarAlunos minhaTurma = new GerenciarAlunos();
-        minhaTurma.cadastrarAluno("João Quinzé de Azevedo", new Data(10, 10, 2001), Sexo.M, "123456", "Informática", "2", 8.5);
-        minhaTurma.cadastrarAluno("Maria Samara Saraiva", new Data(10, 10, 2006), Sexo.M, "123456", "Informática", "2", 6.5);
-        minhaTurma.cadastrarAluno("Joana Martins de Oliveira", new Data(10, 10, 1997), Sexo.F, "123456", "Informática", "2", 3.5);
+        minhaTurma.cadastrarAluno("João Quinzé de Azevedo", new Data(10, 10, 2001), Sexo.M, 654321, "Informática", "2", 8.5);
+        minhaTurma.cadastrarAluno("Maria Samara Saraiva", new Data(10, 10, 2006), Sexo.M, 952056, "Informática", "2", 6.5);
+        minhaTurma.cadastrarAluno("Joana Martins de Oliveira", new Data(10, 10, 1997), Sexo.F, 623109, "Informática", "2", 3.5);
         iniciar(minhaTurma);
 
     }    
@@ -25,11 +25,11 @@ public class App {
 
         boolean continuar = true;
         String mensagem = "";
-        String nome, matricula, curso, periodo, situacao;
+        String nome, curso, periodo, situacao;
         Sexo sexo;
         double media;
         Data dataNascimento;
-        int idade, dia, mes, ano;
+        int idade, dia, mes, ano, matricula;
         String sn[] = {"Sim", "Nao"};
         int snOption;
 
@@ -71,11 +71,12 @@ public class App {
                                      snOption = JOptionPane.showOptionDialog(null, mensagem, "Sistema de Gerenciamento de Alunos", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, sn, sn[1]);
                                      if(snOption == 0){
                                         nome = JOptionPane.showInputDialog("Digite o nome completo do aluno(a):");
+                                        dataNascimento = DataBox.showDataBox();
                                         sexo = Sexo.converterParaSexo(JOptionPane.showOptionDialog(null, "Qual o sexo do aluno(a)?", "Sistema de Gerenciamento de Alunos", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, Sexo.values(), null));
                                         curso = JOptionPane.showInputDialog("Qual o curso do aluno(a)?");
                                         periodo = JOptionPane.showInputDialog("Qual o período do aluno(a)?");
                                         media = Double.parseDouble(JOptionPane.showInputDialog("Qual a média acadêmica do aluno(a)?"));
-                                        //minhaTurma.cadastrarAluno(nome, data, sexo, matricula, curso, periodo, media);
+                                        minhaTurma.cadastrarAluno(nome, dataNascimento, sexo, GerenciarAlunos.generateMatricula(), curso, periodo, media);
                                         JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso!");
                                      }
                             break;

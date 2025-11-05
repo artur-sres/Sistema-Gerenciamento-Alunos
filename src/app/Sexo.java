@@ -11,7 +11,6 @@ public enum Sexo {
             case 1:
                 return Sexo.F; 
             default:
-                // É importante tratar valores inesperados
                 throw new IllegalArgumentException("Valor de sexo inválido: " + valor);
         }
     }

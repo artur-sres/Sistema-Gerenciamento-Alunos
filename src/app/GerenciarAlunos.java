@@ -2,6 +2,7 @@ package app;
 import javax.swing.JOptionPane;
 public class GerenciarAlunos {
     public static final int MAX_ALUNOS = 10;
+    public static int matricula = 123456;
     private Aluno turma[];
     private int id;
 
@@ -21,7 +22,11 @@ public class GerenciarAlunos {
         this.turma = turma;
     }
 
-    public void cadastrarAluno(String nome, Data dataNascimento, Sexo sexo, String matricula, String curso, String periodo, double media){
+    public static int generateMatricula(){
+        return matricula++;
+    }
+
+    public void cadastrarAluno(String nome, Data dataNascimento, Sexo sexo, int matricula, String curso, String periodo, double media){
         Aluno aluno = new Aluno(nome, dataNascimento, sexo, matricula, curso, periodo, media);
         turma[id] = aluno;
         id++;

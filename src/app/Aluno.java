@@ -8,14 +8,14 @@ public class Aluno {
     int idade;
     Sexo sexo;
     //Atributos academicos
-    String matricula;
+    int matricula;
     String curso;
     String periodo;
     double media;
     String situacao;
 
     //Construtor
-    public Aluno(String nome, Data dataNascimento, Sexo sexo, String matricula, String curso, String periodo, double media) {
+    public Aluno(String nome, Data dataNascimento, Sexo sexo, int matricula, String curso, String periodo, double media) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.idade = calcularIdade(dataNascimento);
@@ -38,7 +38,7 @@ public class Aluno {
     public String getNome() {
         return this.nome;
     }
-    public String getMatricula() {
+    public int getMatricula() {
         return this.matricula;
     }
     public String getCurso() {
