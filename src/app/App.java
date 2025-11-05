@@ -13,9 +13,10 @@ public class App {
         }
 
         GerenciarAlunos minhaTurma = new GerenciarAlunos();
-        minhaTurma.cadastrarAluno("João Quinzé de Azevedo", new Data(10, 10, 2001), Sexo.M, 654321, "Informática", "2", 8.5);
+        minhaTurma.cadastrarAluno("João Quinzé Oliveira", new Data(10, 10, 2001), Sexo.M, 654321, "Informática", "2", 8.5);
         minhaTurma.cadastrarAluno("Maria Samara Saraiva", new Data(10, 10, 2006), Sexo.M, 952056, "Informática", "2", 6.5);
-        minhaTurma.cadastrarAluno("Joana Martins de Oliveira", new Data(10, 10, 1997), Sexo.F, 623109, "Informática", "2", 3.5);
+        minhaTurma.cadastrarAluno("Joana Martins Rabelo", new Data(10, 10, 1997), Sexo.F, 623109, "Informática", "2", 3.5);
+        minhaTurma.cadastrarAluno("Katia Santos Martins", new Data(10, 10, 2001), Sexo.M, 654321, "Informática", "2", 8.5);
         iniciar(minhaTurma);
 
     }    
@@ -29,7 +30,7 @@ public class App {
         Sexo sexo;
         double media;
         Data dataNascimento;
-        int idade, dia, mes, ano, matricula;
+        int idade, matricula;
         String sn[] = {"Sim", "Nao"};
         int snOption;
 
@@ -81,6 +82,20 @@ public class App {
                                      }
                             break;
                         case 1: //Buscar Aluno
+                            if(minhaTurma.getId() == 0){
+                                JOptionPane.showMessageDialog(null, "Turma vazia!");
+                            }else{
+                                try{
+                                    matricula = Integer.parseInt(JOptionPane.showInputDialog("Digite a matricula do aluno(a) que deseja buscar:"));
+                                    mensagem = "<html>" + minhaTurma.buscarAluno(matricula) + "</html>";
+                                    if(mensagem.equals("<html>null</html>")){
+                                        continue;
+                                    }
+                                    JOptionPane.showMessageDialog(null, mensagem);
+                                } catch(NumberFormatException e) {
+                                    JOptionPane.showMessageDialog(null, "Matricula invalida!");
+                                }
+                            }
 
                             break;
                         case 2: //Listar Alunos
