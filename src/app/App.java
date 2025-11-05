@@ -33,6 +33,7 @@ public class App {
         int idade, matricula;
         String sn[] = {"Sim", "Nao"};
         int snOption;
+        Aluno aluno;
 
         while(continuar){
             String opcoes[] = {"Ver relatórios sobre a turma", "Gerenciar alunos da turma", "Sair"};
@@ -56,7 +57,7 @@ public class App {
                     break;
             
                 case 1: //Gerenciar Alunos
-                    String opcoesB[] = {"Cadastrar aluno", "Buscar aluno", "Listar alunos", "Excluir aluno", "Atualizar aluno", "Voltar"};
+                    String opcoesB[] = {"Cadastrar aluno", "Buscar aluno", "Listar alunos", "Remover aluno", "Atualizar aluno", "Voltar"};
                     int opcaoSelecionadaB = JOptionPane.showOptionDialog(null,"<html><h4>Gerenciamento de alunos</h4></html>", "Sistema de Gerenciamento de Alunos", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesB, opcoesB[5]);
                     switch (opcaoSelecionadaB) {
                         case 0: //Cadastrar Aluno
@@ -87,10 +88,11 @@ public class App {
                             }else{
                                 try{
                                     matricula = Integer.parseInt(JOptionPane.showInputDialog("Digite a matricula do aluno(a) que deseja buscar:"));
-                                    mensagem = "<html>" + minhaTurma.buscarAluno(matricula) + "</html>";
-                                    if(mensagem.equals("<html>null</html>")){
+                                    aluno = minhaTurma.buscarAluno(matricula);
+                                    if(aluno == null){
                                         continue;
                                     }
+                                    mensagem = "<html>" + aluno.toString() + "</html>";
                                     JOptionPane.showMessageDialog(null, mensagem);
                                 } catch(NumberFormatException e) {
                                     JOptionPane.showMessageDialog(null, "Matricula invalida!");
@@ -104,17 +106,32 @@ public class App {
                             }else{
                                 minhaTurma.listarAlunos();
                                 }
-                            }
                             break;
-                        case 3:
+                        case 3: //Remover Aluno
+                            if(minhaTurma.getId() == 0){
+                                JOptionPane.showMessageDialog(null, "Turma vazia!");
+                            }else{
+                                try{
+                                    matricula = Integer.parseInt(JOptionPane.showInputDialog("Digite a matricula do aluno(a) que deseja remover:"));
+                                    aluno = minhaTurma.buscarAluno(matricula);
+                                    if(aluno == null){
+                                        continue;
+                                    }
+                                    minhaTurma.removerAluno(aluno);
+                                    mensagem = "<html>O aluno:<br><br>" + aluno.toString() + "<br<br>foi removido com sucesso!</html>";
+                                    JOptionPane.showMessageDialog(null, mensagem);
+                                } catch(NumberFormatException | NullPointerException e) {
+                                    JOptionPane.showMessageDialog(null, "Matricula invalida!");
+                                }
+                            }
                             break;
                         case 4:
                             break;
                         case 5:
-                            continue;
-                        default:
-                            continuar = false;
-                            break;     
+                        continuar = false;
+                        break;     
+                        default:    
+                }
             }
         }
     }

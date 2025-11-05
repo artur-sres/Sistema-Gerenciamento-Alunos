@@ -43,20 +43,31 @@ public class GerenciarAlunos {
         JOptionPane.showMessageDialog(null, listados);
     }
 
-    public String buscarAluno(int matricula) {
-        String busca;
+    public Aluno buscarAluno(int matricula) {
+        Aluno busca;
         if(matricula < 100000 || matricula > 999999) {
             JOptionPane.showMessageDialog(null, "Matricula invalida!");
             return null;
         }
         for(int i = 0; i < this.id; i++) {
             if(this.turma[i].getMatricula() == matricula) {
-                busca = this.turma[i].toString();
+                busca = this.turma[i];
                 return busca;
             }
         }
         JOptionPane.showMessageDialog(null, "Aluno nao encontrado!");
         return null;
+    }
+
+    public void removerAluno(Aluno aluno) {
+        if(aluno != null) {
+            for(int i = 0; i < this.id; i++) {
+                if(this.turma[i].getMatricula() == matricula) {
+                    this.turma[i] = null;
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Aluno removido com sucesso!");
+        }
     }
 }
     
