@@ -36,52 +36,38 @@ public class App {
         Aluno aluno;
 
         while(continuar){
-            String opcoes[] = {"Ver relatórios sobre a turma", "Gerenciar alunos da turma", "Sair"};
+            String opcoes[] = {"Gerenciar alunos da turma", "Relatórios da turma",  "Sair"};
             int opcaoSelecionada = JOptionPane.showOptionDialog(null, "<html><h3>Escolha uma opção para continuar:</h3></html>", "Sistema de Gerenciamento de Alunos", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoes, opcoes[2]);
         
             switch (opcaoSelecionada) {
-                case 0: //Relatórios
-                String opcoesA[] = {"Listar alunos por nota", "Listar alunos por idade", "Voltar"};
-                int opcaoSelecionadaA = JOptionPane.showOptionDialog(null,"<html><h4>Informações sobre a turma</h4></html>", "Sistema de Gerenciamento de Alunos", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesA, opcoesA[2]);
-                switch (opcaoSelecionadaA) {
-                    case 0:
-                        break;
-                    case 1: 
-                        break;
-                    case 2:
-                        continue;
-                    default:
-                        continuar = false;
-                        break;
-                }
-                    break;
-            
-                case 1: //Gerenciar Alunos
+                case 0: //Gerenciar Alunos
                     String opcoesB[] = {"Cadastrar aluno", "Buscar aluno", "Listar alunos", "Remover aluno", "Atualizar aluno", "Voltar"};
                     int opcaoSelecionadaB = JOptionPane.showOptionDialog(null,"<html><h4>Gerenciamento de alunos</h4></html>", "Sistema de Gerenciamento de Alunos", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesB, opcoesB[5]);
                     switch (opcaoSelecionadaB) {
-                        case 0: //Cadastrar Aluno
-                            if(minhaTurma.getId() == GerenciarAlunos.MAX_ALUNOS){
-                                JOptionPane.showMessageDialog(null, "A turma já chegou a sua capacidade maxima!\nNão é possivel cadastrar mais alunos!");
-                                break;
-                            }
-                            mensagem = "<html><h4>Para podermos cadastrar um aluno, precisamos de algumas informações:</h4>"
-                                     + "Nome Completo do Aluno(a)<br> Data de Nascimento<br> Sexo<br> Curso<br> Período<br> e Média Acadêmica<br><br>"
-                                     + "Após isso, uma matricula será gerada automaticamente e o aluno será cadastrado na turma<br>"
-                                     + "Deseja prosseguir?</html>";
-                                     
-                                     snOption = JOptionPane.showOptionDialog(null, mensagem, "Sistema de Gerenciamento de Alunos", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, sn, sn[1]);
-                                     if(snOption == 0){
-                                        nome = JOptionPane.showInputDialog("Digite o nome completo do aluno(a):");
-                                        dataNascimento = DataBox.showDataBox();
-                                        sexo = Sexo.converterParaSexo(JOptionPane.showOptionDialog(null, "Qual o sexo do aluno(a)?", "Sistema de Gerenciamento de Alunos", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, Sexo.values(), null));
-                                        curso = JOptionPane.showInputDialog("Qual o curso do aluno(a)?");
-                                        periodo = JOptionPane.showInputDialog("Qual o período do aluno(a)?");
-                                        media = Double.parseDouble(JOptionPane.showInputDialog("Qual a média acadêmica do aluno(a)?"));
-                                        minhaTurma.cadastrarAluno(nome, dataNascimento, sexo, GerenciarAlunos.generateMatricula(), curso, periodo, media);
-                                        JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso!");
-                                     }
+                    case 0: //Cadastrar Aluno
+                        if(minhaTurma.getId() == GerenciarAlunos.MAX_ALUNOS){
+                            JOptionPane.showMessageDialog(null, "A turma já chegou a sua capacidade maxima!\nNão é possivel cadastrar mais alunos!");
                             break;
+                        }
+                        mensagem = "<html><h4>Para podermos cadastrar um aluno, precisamos de algumas informações:</h4>"
+                        + "Nome Completo do Aluno(a)<br> Data de Nascimento<br> Sexo<br> Curso<br> Período<br> e Média Acadêmica<br><br>"
+                        + "Após isso, uma matricula será gerada automaticamente e o aluno será cadastrado na turma<br>"
+                        + "Deseja prosseguir?</html>";
+                        
+                        snOption = JOptionPane.showOptionDialog(null, mensagem, "Sistema de Gerenciamento de Alunos", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, sn, sn[1]);
+
+                        if(snOption == 0){
+                            nome = JOptionPane.showInputDialog("Digite o nome completo do aluno(a):");
+                            dataNascimento = DataBox.showDataBox();
+                            String sexoOP[] = {"Masculino", "Feminino", "Cancelar"};
+                            sexo = Sexo.converterParaSexo(JOptionPane.showOptionDialog(null, "Qual o sexo do aluno(a)?", "Sistema de Gerenciamento de Alunos", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, sexoOP, sexoOP[2]));
+                            curso = JOptionPane.showInputDialog("Qual o curso do aluno(a)?");
+                            periodo = JOptionPane.showInputDialog("Qual o período do aluno(a)?");
+                            media = Double.parseDouble(JOptionPane.showInputDialog("Qual a média acadêmica do aluno(a)?"));
+                            minhaTurma.cadastrarAluno(nome, dataNascimento, sexo, GerenciarAlunos.generateMatricula(), curso, periodo, media);
+                            JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso!");
+                        }
+                        break;
                         case 1: //Buscar Aluno
                             if(minhaTurma.getId() == 0){
                                 JOptionPane.showMessageDialog(null, "Turma vazia!");
@@ -98,15 +84,16 @@ public class App {
                                     JOptionPane.showMessageDialog(null, "Matricula invalida!");
                                 }
                             }
-
                             break;
+
                         case 2: //Listar Alunos
                             if(minhaTurma.getId() == 0){
                                 JOptionPane.showMessageDialog(null, "Turma vazia!");
                             }else{
                                 minhaTurma.listarAlunos();
-                                }
+                            }
                             break;
+
                         case 3: //Remover Aluno
                             if(minhaTurma.getId() == 0){
                                 JOptionPane.showMessageDialog(null, "Turma vazia!");
@@ -125,13 +112,21 @@ public class App {
                                 }
                             }
                             break;
-                        case 4:
-                            break;
-                        case 5:
-                        continuar = false;
-                        break;     
-                        default:    
-                }
+
+                        default:
+                            continue;
+                        }
+                        break;
+                case 1: //Relatórios
+                    String opcoesA[] = {"Listar alunos por nota", "Listar alunos por idade", "Voltar"};
+                    int opcaoSelecionadaA = JOptionPane.showOptionDialog(null,"<html><h4>Informações sobre a turma</h4></html>", "Sistema de Gerenciamento de Alunos", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesA, opcoesA[2]);
+                    
+                case 2: //Sair 
+                    continuar = false;
+                    break;
+                default:
+                    continuar = false;
+                    break;
             }
         }
     }
