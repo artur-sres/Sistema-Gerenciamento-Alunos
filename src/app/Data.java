@@ -1,6 +1,13 @@
 package app;
 import java.time.LocalDate;
 
+/**
+ * Representa uma data (dia, mês, ano) e calcula idade a partir dela.
+ * @author Artur Saraiva Rabelo (asr.engsoft@gmail.com)
+ * @version 1.0
+ * @since 2025-11-03
+ */
+
 public class Data {
     private String dataFormatada;
     private int dia;

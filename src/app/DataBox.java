@@ -4,6 +4,13 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 
+/**
+ * Caixa de diálogo para seleção de dia, mês e ano (usada para obter Data de nascimento).
+ * @author Artur Saraiva Rabelo (asr.engsoft@gmail.com)
+ * @version 1.0
+ * @since 2025-11-04
+ */
+
 public class DataBox{
     public static Data showDataBox(){
         JComboBox<Integer> comboDia = new JComboBox<>();

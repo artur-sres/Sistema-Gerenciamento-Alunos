@@ -1,5 +1,11 @@
 package app;
 
+/**
+ * Enumeração que representa os sexos possíveis (M/F) e utilidades de conversão.
+ * @author Artur Saraiva Rabelo (asr.engsoft@gmail.com)
+ * @version 1.0
+ * @since 2025-11-03
+ */
 public enum Sexo {
     M,
     F;

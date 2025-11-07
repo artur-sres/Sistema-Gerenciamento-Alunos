@@ -1,6 +1,14 @@
 package app;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+
+/**
+ * Classe principal que inicia a aplicação e exibe a interface (menus e caixas de diálogo).
+ * @author Artur Saraiva Rabelo (asr.engsoft@gmail.com)
+ * @version 1.0
+ * @since 2025-11-02
+ */
+
 public class App {
     
     public static void main(String[] args) throws Exception {
@@ -26,7 +34,7 @@ public class App {
 
         boolean continuar = true;
         String mensagem = "";
-        String nome, curso, periodo, situacao;
+        String nome, curso, periodo, situacao, mediaInput;
         Sexo sexo;
         double media;
         Data dataNascimento;
@@ -83,7 +91,7 @@ public class App {
                                 }
                                 periodo = JOptionPane.showInputDialog("<html>Qual o período do aluno(a)?<br>(Número de semestres desde que ingressou)</html>");
 
-                                String mediaInput = JOptionPane.showInputDialog("Qual a média acadêmica do aluno(a)?");
+                                mediaInput = JOptionPane.showInputDialog("Qual a média acadêmica do aluno(a)?");
                                 if (mediaInput == null || mediaInput.equals("") || mediaInput.equals("-1")) {
                                     break; 
                                 }
@@ -154,7 +162,7 @@ public class App {
                                 }
                             }
                             break;
-                        case 4: //Atualizar Aluno (em desenvolvimento)
+                        case 4: //Atualizar Aluno (ok)
                             if(minhaTurma.getId() == 0){
                                 JOptionPane.showMessageDialog(null, "Turma vazia!");
                             }else{
@@ -169,30 +177,61 @@ public class App {
                                         mensagem = "<html>Aluno:<br><br>" + aluno.toString() + "<br><br>Qual informação deseja modificar?</html>";
                                         int atualizarOption = JOptionPane.showOptionDialog(null, mensagem, "Sistema de Gerenciamento de Alunos", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Nome", "Data de Nascimento", "Sexo", "Curso", "Período", "Média Acadêmica", "Sair"}, "Sair");
                                         switch(atualizarOption){
-                                            case 0:
-                                                aluno.setNome(JOptionPane.showInputDialog("Digite o novo nome:"));
+                                            case 0: //Nome
+                                            nome =(JOptionPane.showInputDialog("Digite o novo nome:"));
+                                            if(nome == null) {
                                                 break;
-                                            case 1:
-                                                aluno.setDataNascimento(DataBox.showDataBox());
+                                            } else if (nome.equals("") | contemNumeros(nome) ) {
+                                                JOptionPane.showMessageDialog(null, "<html>Nome inválido!<br>A operação foi cancelada.</html>");
                                                 break;
-                                            case 2:
+                                            }
+                                            aluno.setNome(nome);
+                                                break;
+                                            case 1: //Data de Nascimento
+                                                dataNascimento = (DataBox.showDataBox());
+                                                if(dataNascimento == null){
+                                                    break;
+                                                }
+                                                aluno.setDataNascimento(dataNascimento);
+                                                break;
+                                            case 2: //Sexo
                                                 int sexoSelected = (JOptionPane.showOptionDialog(null, "Qual o sexo do aluno(a)?", "Sistema de Gerenciamento de Alunos", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, sexoOP, sexoOP[2]));
                                                 if(sexoSelected == 0){
                                                     aluno.setSexo(Sexo.M);
                                                 }else if(sexoSelected == 1){
                                                     aluno.setSexo(Sexo.F);
+                                                } else if(sexoSelected == 2 | sexoSelected == -1){
+                                                    break;
                                                 }
                                                 break;
-                                            case 3:
-                                                aluno.setCurso(JOptionPane.showInputDialog("Digite o novo curso:"));
+                                            case 3: //Curso
+                                                curso = (JOptionPane.showInputDialog("Digite o novo curso:"));
+                                                if(curso == null) {
+                                                    break;
+                                                } else if (curso.equals("") | contemNumeros(curso) ) {
+                                                    JOptionPane.showMessageDialog(null, "<html>Nome inválido!<br>A operação foi cancelada.</html>");
+                                                    break;
+                                                }
+                                                aluno.setCurso(curso);
                                                 break;
-                                            case 4:
+                                            case 4: //Período
                                                 aluno.setPeriodo(JOptionPane.showInputDialog("Digite o novo período:"));
                                                 break;
-                                            case 5:
-                                                aluno.setMedia(Double.parseDouble(JOptionPane.showInputDialog("Digite a nova média acadêmica:")));
+                                            case 5: //Média Acadêmica
+                                                mediaInput = JOptionPane.showInputDialog("Qual a média acadêmica do aluno(a)?");
+                                                if (mediaInput == null || mediaInput.equals("") || mediaInput.equals("-1")) {
+                                                    break; 
+                                                }
+                                                try {
+                                                    mediaInput = mediaInput.replace(',', '.'); 
+                                                    media = Double.parseDouble(mediaInput);
+                                                } catch (NumberFormatException e) {
+                                                    JOptionPane.showMessageDialog(null, "<html>Média inválida!<br>A operação foi cancelada.</html>");
+                                                    break;
+                                                }
+                                                aluno.setMedia(media);
                                                 break;
-                                            case 6:
+                                            case 6: //Sair
                                                 atualizar = false;
                                                 break;
                                         }

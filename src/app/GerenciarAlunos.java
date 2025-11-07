@@ -1,5 +1,13 @@
 package app;
 import javax.swing.JOptionPane;
+
+/**
+ * Gerencia operações sobre a turma de alunos (cadastrar, buscar, listar, remover e atualizar).
+ * @author Artur Saraiva Rabelo (asr.engsoft@gmail.com)
+ * @version 1.0
+ * @since 2025-11-02
+ */
+
 public class GerenciarAlunos {
     public static final int MAX_ALUNOS = 5;
     public static int matricula = 123456;
