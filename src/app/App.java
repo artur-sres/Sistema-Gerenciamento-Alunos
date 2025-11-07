@@ -98,14 +98,22 @@ public class App {
                             if(minhaTurma.getId() == 0){
                                 JOptionPane.showMessageDialog(null, "Turma vazia!");
                             }else{
+                                String matriculaInput = (JOptionPane.showInputDialog("Digite a matricula do aluno(a) que deseja remover:"));
+                                if(matriculaInput == null){
+                                    continue;
+                                }
                                 try{
-                                    matricula = Integer.parseInt(JOptionPane.showInputDialog("Digite a matricula do aluno(a) que deseja remover:"));
+                                    matricula = Integer.parseInt(matriculaInput);
                                     aluno = minhaTurma.buscarAluno(matricula);
                                     if(aluno == null){
                                         continue;
                                     }
                                     minhaTurma.removerAluno(aluno);
-                                    mensagem = "<html>O aluno:<br><br>" + aluno.toString() + "<br<br>foi removido com sucesso!</html>";
+                                    if(aluno.getSexo() == Sexo.M){
+                                        mensagem = "<html>O Aluno:<br><br>" + aluno.toString() + "<br<br>Foi removido com sucesso!</html>";
+                                    }else if(aluno.getSexo() == Sexo.F){
+                                        mensagem = "<html>A Aluna:<br><br>" + aluno.toString() + "<br<br>Foi removida com sucesso!</html>";
+                                    }
                                     JOptionPane.showMessageDialog(null, mensagem);
                                 } catch(NumberFormatException | NullPointerException e) {
                                     JOptionPane.showMessageDialog(null, "Matricula invalida!");

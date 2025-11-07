@@ -1,7 +1,7 @@
 package app;
 import javax.swing.JOptionPane;
 public class GerenciarAlunos {
-    public static final int MAX_ALUNOS = 10;
+    public static final int MAX_ALUNOS = 5;
     public static int matricula = 123456;
     private Aluno turma[];
     private int id;
@@ -60,13 +60,17 @@ public class GerenciarAlunos {
     }
 
     public void removerAluno(Aluno aluno) {
-        if(aluno != null) {
-            for(int i = 0; i < this.id; i++) {
-                if(this.turma[i].getMatricula() == matricula) {
-                    this.turma[i] = null;
+        if (aluno != null) {
+            for (int i = 0; i < this.id; i++) {
+                if (this.turma[i].getMatricula() == aluno.getMatricula()) {
+                    for (int j = i; j < this.id - 1; j++) {
+                        this.turma[j] = this.turma[j + 1];
+                    }
+                    this.id--;
+                    this.turma[this.id] = null;
+                    break;
                 }
             }
-            JOptionPane.showMessageDialog(null, "Aluno removido com sucesso!");
         }
     }
 }

@@ -53,6 +53,9 @@ public class Aluno {
     public String getSituacao() {
         return this.situacao;
     }
+    public Sexo getSexo() {
+        return this.sexo;
+    }
 
     public String coloredSituacao(String situacao){
         if(this.situacao == "Aprovado") {
