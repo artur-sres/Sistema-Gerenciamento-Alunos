@@ -7,7 +7,7 @@ import javax.swing.JComboBox;
 /**
  * Caixa de diálogo para seleção de dia, mês e ano (usada para obter Data de nascimento).
  * @author Artur Saraiva Rabelo (asr.engsoft@gmail.com)
- * @version 1.0
+ * @version 1.1
  * @since 2025-11-04
  */
 

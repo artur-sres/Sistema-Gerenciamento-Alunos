@@ -4,7 +4,7 @@ import static app.Data.calcularIdade;
 /**
  * Representa um aluno com dados pessoais e acadêmicos (nome, matrícula, média, situação etc.).
  * @author Artur Saraiva Rabelo (asr.engsoft@gmail.com)
- * @version 1.0
+ * @version 1.4.2
  * @since 2025-11-02
  */
 

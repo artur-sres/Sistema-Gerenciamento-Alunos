@@ -5,7 +5,7 @@ import javax.swing.UIManager;
 /**
  * Classe principal que inicia a aplicação e exibe a interface (menus e caixas de diálogo).
  * @author Artur Saraiva Rabelo (asr.engsoft@gmail.com)
- * @version 1.0
+ * @version 1.5.3
  * @since 2025-11-02
  */
 
