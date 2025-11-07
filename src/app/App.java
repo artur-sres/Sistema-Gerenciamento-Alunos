@@ -44,7 +44,7 @@ public class App {
                     String opcoesB[] = {"Cadastrar aluno", "Buscar aluno", "Listar alunos", "Remover aluno", "Atualizar aluno", "Voltar"};
                     int opcaoSelecionadaB = JOptionPane.showOptionDialog(null,"<html><h4>Gerenciamento de alunos</h4></html>", "Sistema de Gerenciamento de Alunos", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesB, opcoesB[5]);
                     switch (opcaoSelecionadaB) {
-                        case 0: //Cadastrar Aluno (Precisa corrigir a falha quando cancela no meio do cadastro)
+                        case 0: //Cadastrar Aluno (Funcionando, mas precisa corrigir a falha quando cancela no meio do cadastro)
                             if(minhaTurma.getId() == GerenciarAlunos.MAX_ALUNOS){
                                 JOptionPane.showMessageDialog(null, "A turma já chegou a sua capacidade maxima!\nNão é possivel cadastrar mais alunos!");
                                 break;
@@ -58,14 +58,49 @@ public class App {
 
                             if(snOption == 0){
                                 nome = JOptionPane.showInputDialog("Digite o nome completo do aluno(a):");
+                                if(nome == null) {
+                                    break;
+                                } else if (nome.equals("") | contemNumeros(nome) ) {
+                                    JOptionPane.showMessageDialog(null, "<html>Nome inválido!<br>A operação foi cancelada.</html>");
+                                    break;
+                                }
                                 dataNascimento = DataBox.showDataBox();
+                                if(dataNascimento == null){
+                                    break;
+                                }
                                 String sexoOP[] = {"Masculino", "Feminino", "Cancelar"};
-                                sexo = Sexo.converterParaSexo(JOptionPane.showOptionDialog(null, "Qual o sexo do aluno(a)?", "Sistema de Gerenciamento de Alunos", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, sexoOP, sexoOP[2]));
+                                int sexoSelected = (JOptionPane.showOptionDialog(null, "Qual o sexo do aluno(a)?", "Sistema de Gerenciamento de Alunos", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, sexoOP, sexoOP[2]));
+                                if(sexoSelected == 2 | sexoSelected == -1){
+                                    break;
+                                }
+                                sexo = Sexo.converterParaSexo(sexoSelected);
                                 curso = JOptionPane.showInputDialog("Qual o curso do aluno(a)?");
-                                periodo = JOptionPane.showInputDialog("Qual o período do aluno(a)?");
-                                media = Double.parseDouble(JOptionPane.showInputDialog("Qual a média acadêmica do aluno(a)?"));
-                                minhaTurma.cadastrarAluno(nome, dataNascimento, sexo, GerenciarAlunos.generateMatricula(), curso, periodo, media);
-                                JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso!");
+                                if(curso == null) {
+                                    break;
+                                } else if (curso.equals("") | contemNumeros(curso) ) {
+                                    JOptionPane.showMessageDialog(null, "<html>Nome inválido!<br>A operação foi cancelada.</html>");
+                                    break;
+                                }
+                                periodo = JOptionPane.showInputDialog("<html>Qual o período do aluno(a)?<br>(Número de semestres desde que ingressou)</html>");
+
+                                String mediaInput = JOptionPane.showInputDialog("Qual a média acadêmica do aluno(a)?");
+                                if (mediaInput == null || mediaInput.equals("") || mediaInput.equals("-1")) {
+                                    break; 
+                                }
+                                try {
+                                    mediaInput = mediaInput.replace(',', '.'); 
+                                    
+                                    media = Double.parseDouble(mediaInput);
+                                } catch (NumberFormatException e) {
+                                    JOptionPane.showMessageDialog(null, "<html>Média inválida!<br>A operação foi cancelada.</html>");
+                                    break;
+                                }
+                                try{
+                                    minhaTurma.cadastrarAluno(nome, dataNascimento, sexo, GerenciarAlunos.generateMatricula(), curso, periodo, media);
+                                    JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso!");
+                                } catch(Exception e){
+                                    JOptionPane.showMessageDialog(null, "Erro ao cadastrar aluno!");
+                                }
                             }
                             break;
                         case 1: //Buscar Aluno (ok)
@@ -94,7 +129,7 @@ public class App {
                             }
                             break;
 
-                        case 3: //Remover Aluno (A ser implementado)
+                        case 3: //Remover Aluno (ok)
                             if(minhaTurma.getId() == 0){
                                 JOptionPane.showMessageDialog(null, "Turma vazia!");
                             }else{
@@ -138,4 +173,16 @@ public class App {
             }
         }
     }
+
+    public static boolean contemNumeros(String texto) {
+    if (texto == null) {
+        return false;
+    }
+    for (char c : texto.toCharArray()) {
+        if (Character.isDigit(c)) {
+            return true; 
+        }
+    }
+    return false;
+}
 }

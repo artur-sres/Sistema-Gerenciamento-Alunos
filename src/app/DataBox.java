@@ -16,7 +16,7 @@ public class DataBox{
         for (int i = 1; i <= 12; i++) {
             comboMes.addItem(i);
         }
-        for (int i = 1990; i <= 2030; i++) {
+        for (int i = 1990; i <= 2025; i++) {
             comboAno.addItem(i);
         }
 
