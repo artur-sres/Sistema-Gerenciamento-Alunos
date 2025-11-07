@@ -57,6 +57,47 @@ public class Aluno {
         return this.sexo;
     }
 
+    //Setters
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    public void setDataNascimento(Data dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
+    public void setMatricula(int matricula) {
+        this.matricula = matricula;
+    }
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+    public void setPeriodo(String periodo) {
+        this.periodo = periodo;
+    }
+    public void setMedia(double media) {
+        this.media = media;
+        if(media >= 7) {
+            setSituacao("Aprovado");
+        } else if (media >= 4) {
+            setSituacao("Final");
+        } else {
+            setSituacao("Reprovado");
+        }
+
+
+
+    }
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
+    }
+
+
+
     public String coloredSituacao(String situacao){
         if(this.situacao == "Aprovado") {
             return "<font color=\"green\">" + situacao + "</font>";

@@ -34,6 +34,7 @@ public class App {
         String sn[] = {"Sim", "Nao"};
         int snOption;
         Aluno aluno;
+        String sexoOP[] = {"Masculino", "Feminino", "Cancelar"};
 
         while(continuar){
             String opcoes[] = {"Gerenciar alunos da turma", "Relatórios da turma",  "Sair"};
@@ -44,7 +45,7 @@ public class App {
                     String opcoesB[] = {"Cadastrar aluno", "Buscar aluno", "Listar alunos", "Remover aluno", "Atualizar aluno", "Voltar"};
                     int opcaoSelecionadaB = JOptionPane.showOptionDialog(null,"<html><h4>Gerenciamento de alunos</h4></html>", "Sistema de Gerenciamento de Alunos", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesB, opcoesB[5]);
                     switch (opcaoSelecionadaB) {
-                        case 0: //Cadastrar Aluno (Funcionando, mas precisa corrigir a falha quando cancela no meio do cadastro)
+                        case 0: //Cadastrar Aluno (ok)
                             if(minhaTurma.getId() == GerenciarAlunos.MAX_ALUNOS){
                                 JOptionPane.showMessageDialog(null, "A turma já chegou a sua capacidade maxima!\nNão é possivel cadastrar mais alunos!");
                                 break;
@@ -68,7 +69,6 @@ public class App {
                                 if(dataNascimento == null){
                                     break;
                                 }
-                                String sexoOP[] = {"Masculino", "Feminino", "Cancelar"};
                                 int sexoSelected = (JOptionPane.showOptionDialog(null, "Qual o sexo do aluno(a)?", "Sistema de Gerenciamento de Alunos", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, sexoOP, sexoOP[2]));
                                 if(sexoSelected == 2 | sexoSelected == -1){
                                     break;
@@ -89,7 +89,6 @@ public class App {
                                 }
                                 try {
                                     mediaInput = mediaInput.replace(',', '.'); 
-                                    
                                     media = Double.parseDouble(mediaInput);
                                 } catch (NumberFormatException e) {
                                     JOptionPane.showMessageDialog(null, "<html>Média inválida!<br>A operação foi cancelada.</html>");
@@ -155,13 +154,60 @@ public class App {
                                 }
                             }
                             break;
-
+                        case 4: //Atualizar Aluno (em desenvolvimento)
+                            if(minhaTurma.getId() == 0){
+                                JOptionPane.showMessageDialog(null, "Turma vazia!");
+                            }else{
+                                try{
+                                    matricula = Integer.parseInt(JOptionPane.showInputDialog("Digite a matricula do aluno(a) que deseja modificar:"));
+                                    aluno = minhaTurma.buscarAluno(matricula);
+                                    if(aluno == null){
+                                        continue;
+                                    }
+                                    boolean atualizar = true;
+                                    while(atualizar){
+                                        mensagem = "<html>Aluno:<br><br>" + aluno.toString() + "<br><br>Qual informação deseja modificar?</html>";
+                                        int atualizarOption = JOptionPane.showOptionDialog(null, mensagem, "Sistema de Gerenciamento de Alunos", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Nome", "Data de Nascimento", "Sexo", "Curso", "Período", "Média Acadêmica", "Sair"}, "Sair");
+                                        switch(atualizarOption){
+                                            case 0:
+                                                aluno.setNome(JOptionPane.showInputDialog("Digite o novo nome:"));
+                                                break;
+                                            case 1:
+                                                aluno.setDataNascimento(DataBox.showDataBox());
+                                                break;
+                                            case 2:
+                                                int sexoSelected = (JOptionPane.showOptionDialog(null, "Qual o sexo do aluno(a)?", "Sistema de Gerenciamento de Alunos", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, sexoOP, sexoOP[2]));
+                                                if(sexoSelected == 0){
+                                                    aluno.setSexo(Sexo.M);
+                                                }else if(sexoSelected == 1){
+                                                    aluno.setSexo(Sexo.F);
+                                                }
+                                                break;
+                                            case 3:
+                                                aluno.setCurso(JOptionPane.showInputDialog("Digite o novo curso:"));
+                                                break;
+                                            case 4:
+                                                aluno.setPeriodo(JOptionPane.showInputDialog("Digite o novo período:"));
+                                                break;
+                                            case 5:
+                                                aluno.setMedia(Double.parseDouble(JOptionPane.showInputDialog("Digite a nova média acadêmica:")));
+                                                break;
+                                            case 6:
+                                                atualizar = false;
+                                                break;
+                                        }
+                                    }
+                                } catch(NumberFormatException e) {
+                                    JOptionPane.showMessageDialog(null, "Matricula invalida!");
+                                }
+                            }
+                            break;
                         default:
                             continue;
                     }
                     break;
                 case 1: //Relatórios
-                    String opcoesA[] = {"Listar alunos por nota", "Listar alunos por idade", "Voltar"};
+                    String opcoesA[] = {"", "", "Voltar"};
                     int opcaoSelecionadaA = JOptionPane.showOptionDialog(null,"<html><h4>Informações sobre a turma</h4></html>", "Sistema de Gerenciamento de Alunos", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesA, opcoesA[2]);
                     
                 case 2: //Sair 
