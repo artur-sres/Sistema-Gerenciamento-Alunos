@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
  */
 
 public class GerenciarAlunos {
-    public static final int MAX_ALUNOS = 5;
+    public static final int MAX_ALUNOS = 10;
     public static int matricula = 123456;
     private Aluno turma[];
     private int id;
@@ -79,6 +79,42 @@ public class GerenciarAlunos {
                 }
             }
         }
+    }
+
+    public String mediaTurma() {
+        double soma = 0.0;
+        for (int i = 0; i < this.id; i++) {
+            soma += this.turma[i].getMedia();
+        }
+        double mediaTurma = soma / this.id;
+        if(mediaTurma > 7) {
+            return String.format("%.2f", mediaTurma) +" - <font color=\"green\">" + "A turnma esta na media</font>";
+        } else if (mediaTurma < 7 && mediaTurma > 6) {
+            return String.format("%.2f", mediaTurma) +" - <font color=\"orange\">" + "A turma esta a baixo da media</font>";
+        } else {
+            return String.format("%.2f", mediaTurma) +" - <font color=\"red\">" + "A turma esta muito abaixo da media</font>";
+        }
+    }
+
+    public int contarAlunosPorSituacao(String situacao) {
+        int contador = 0;
+        for (int i = 0; i < this.id; i++) {
+            if (this.turma[i].getSituacao().equals(situacao)) {
+                contador++;
+            }
+        }
+        return contador;
+    }
+
+    public String listarAlunosPorSituacao(String situacao) {
+        String listados = "<html>";
+        for (int i = 0; i < this.id; i++) {
+            if (this.turma[i].getSituacao().equals(situacao)) {
+                listados += this.turma[i].toString() + "<br><br>";
+            }
+        }
+        listados += "</html>";
+        return listados;
     }
 }
     

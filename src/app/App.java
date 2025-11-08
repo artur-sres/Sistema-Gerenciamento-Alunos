@@ -20,10 +20,14 @@ public class App {
         }
 
         GerenciarAlunos minhaTurma = new GerenciarAlunos();
-        minhaTurma.cadastrarAluno("João Quinzé Oliveira", new Data(10, 10, 2001), Sexo.M, 654321, "Informática", "2", 8.5);
-        minhaTurma.cadastrarAluno("Maria Samara Saraiva", new Data(10, 10, 2006), Sexo.M, 952056, "Informática", "2", 6.5);
-        minhaTurma.cadastrarAluno("Joana Martins Rabelo", new Data(10, 10, 1997), Sexo.F, 623109, "Informática", "2", 3.5);
-        minhaTurma.cadastrarAluno("Katia Santos Martins", new Data(10, 10, 2001), Sexo.M, 654321, "Informática", "2", 8.5);
+        minhaTurma.cadastrarAluno("Maria Eduarda Campos", new Data(15, 3, 2002), Sexo.F, 149856, "Administração", "3", 6.2);
+        minhaTurma.cadastrarAluno("Rafael Lima Souza", new Data(22, 7, 2000), Sexo.M, 234567, "Informática", "1", 7.8);
+        minhaTurma.cadastrarAluno("Ana Beatriz Nogueira", new Data(5, 11, 2003), Sexo.F, 345678, "Enfermagem", "2", 5.9);
+        minhaTurma.cadastrarAluno("Lucas Pereira Santos", new Data(30, 8, 2001), Sexo.M, 456789, "Mecatrônica", "3", 6.7);
+        minhaTurma.cadastrarAluno("Carolina Mendes Silva", new Data(12, 4, 2002), Sexo.F, 567890, "Edificações", "2", 3.5);
+        minhaTurma.cadastrarAluno("Gustavo Henrique Tavares", new Data(18, 9, 2000), Sexo.M, 678901, "Eletrotécnica", "1", 7.3);
+        minhaTurma.cadastrarAluno("Fernanda Alves Ribeiro", new Data(25, 12, 2003), Sexo.F, 789012, "Informática", "3", 2.1);
+        minhaTurma.cadastrarAluno("Bruno Costa Ferreira", new Data(2, 6, 2001), Sexo.M, 890123, "Mecatrônica", "2", 10.0);
         iniciar(minhaTurma);
 
     }    
@@ -253,9 +257,29 @@ public class App {
                     }
                     break;
                 case 1: //Relatórios
-                    String opcoesA[] = {"", "", "Voltar"};
-                    int opcaoSelecionadaA = JOptionPane.showOptionDialog(null,"<html><h4>Informações sobre a turma</h4></html>", "Sistema de Gerenciamento de Alunos", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesA, opcoesA[2]);
-                    
+                    mensagem = "<html>Média da turma: " + minhaTurma.mediaTurma() + "<br><br>"
+                             + "Quantidade de alunos <font color=\"green\">aprovados</font>: " + minhaTurma.contarAlunosPorSituacao("Aprovado") + "<br>"
+                             + "Quantidade de alunos em <font color=\"orange\">final</font>: " + minhaTurma.contarAlunosPorSituacao("Final") + "<br>"
+                             + "Quantidade de alunos <font color=\"red\">reprovados</font>: " + minhaTurma.contarAlunosPorSituacao("Reprovado") + "<br><br>";
+                    String opcoesA[] = {"Alunos aprovados", "Alunos reprovados", "Alunos para final", "Voltar"};
+                    int opcaoSelecionadaA = JOptionPane.showOptionDialog(null, mensagem, "Sistema de Gerenciamento de Alunos", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesA, opcoesA[3]);
+                    switch(opcaoSelecionadaA){
+                        case 0: //Alunos Aprovados
+                            minhaTurma.listarAlunosPorSituacao("Aprovado");
+                            JOptionPane.showMessageDialog(null, minhaTurma.listarAlunosPorSituacao("Aprovado"));    
+                            break;
+                        case 1: //Alunos Reprovados
+                            minhaTurma.listarAlunosPorSituacao("Reprovado");
+                            JOptionPane.showMessageDialog(null, minhaTurma.listarAlunosPorSituacao("Reprovado"));
+                            break;
+                        case 2: //Alunos para Final
+                            minhaTurma.listarAlunosPorSituacao("Final");
+                            JOptionPane.showMessageDialog(null, minhaTurma.listarAlunosPorSituacao("Final"));
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
                 case 2: //Sair 
                     continuar = false;
                     break;
