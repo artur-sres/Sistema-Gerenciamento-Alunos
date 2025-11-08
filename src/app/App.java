@@ -37,11 +37,11 @@ public class App {
 
         boolean continuar = true;
         String mensagem = "";
-        String nome, curso, periodo, situacao, mediaInput, matriculaInput;
+        String nome, curso, periodo, mediaInput, matriculaInput;
         Sexo sexo;
         double media;
         Data dataNascimento;
-        int idade, matricula;
+        int matricula;
         String sn[] = {"Sim", "Nao"};
         int snOption;
         Aluno aluno;
