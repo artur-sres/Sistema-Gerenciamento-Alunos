@@ -105,9 +105,9 @@ public class Aluno {
 
 
     public String coloredSituacao(String situacao){
-        if(this.situacao == "Aprovado") {
+        if(this.situacao.equals("Aprovado")) {
             return "<font color=\"green\">" + situacao + "</font>";
-        } else if (this.situacao == "Final") {
+        } else if (this.situacao.equals("Final")) {
             return "<font color=\"orange\">" + situacao + "</font>";
         } else {
             return "<font color=\"red\">" + situacao + "</font>";
