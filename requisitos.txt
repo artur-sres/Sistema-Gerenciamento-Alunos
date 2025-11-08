@@ -15,7 +15,7 @@
 - Cada aluno deve possuir o nome, matricula, idade, média, período, sexo(M/F), situação (aprovado, final e reprovado), entre outros.
     Atributos para a classe aluno
 
-- Criação de menu com JOPanel para usuário interagir
+- Criação de menu com JOptionPane para usuário interagir
 
 
 
