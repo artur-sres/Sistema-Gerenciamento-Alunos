@@ -4,7 +4,6 @@ import java.time.LocalDate;
 /**
  * Representa uma data (dia, mês, ano) e calcula idade a partir dela.
  * @author Artur Saraiva Rabelo (asr.engsoft@gmail.com)
- * @version 1.2
  * @since 2025-11-03
  */
 

@@ -5,7 +5,6 @@ import javax.swing.UIManager;
 /**
  * Classe principal que inicia a aplicação e exibe a interface (menus e caixas de diálogo).
  * @author Artur Saraiva Rabelo (asr.engsoft@gmail.com)
- * @version 1.5.3
  * @since 2025-11-02
  */
 
@@ -34,7 +33,7 @@ public class App {
 
         boolean continuar = true;
         String mensagem = "";
-        String nome, curso, periodo, situacao, mediaInput;
+        String nome, curso, periodo, situacao, mediaInput, matriculaInput;
         Sexo sexo;
         double media;
         Data dataNascimento;
@@ -115,7 +114,11 @@ public class App {
                                 JOptionPane.showMessageDialog(null, "Turma vazia!");
                             }else{
                                 try{
-                                    matricula = Integer.parseInt(JOptionPane.showInputDialog("Digite a matricula do aluno(a) que deseja buscar:"));
+                                    matriculaInput = (JOptionPane.showInputDialog("Digite a matricula do aluno(a) que deseja buscar:"));
+                                    if(matriculaInput == null){
+                                        continue;
+                                    }
+                                    matricula = Integer.parseInt(matriculaInput);
                                     aluno = minhaTurma.buscarAluno(matricula);
                                     if(aluno == null){
                                         continue;
@@ -140,7 +143,7 @@ public class App {
                             if(minhaTurma.getId() == 0){
                                 JOptionPane.showMessageDialog(null, "Turma vazia!");
                             }else{
-                                String matriculaInput = (JOptionPane.showInputDialog("Digite a matricula do aluno(a) que deseja remover:"));
+                                matriculaInput = (JOptionPane.showInputDialog("Digite a matricula do aluno(a) que deseja remover:"));
                                 if(matriculaInput == null){
                                     continue;
                                 }
@@ -167,9 +170,13 @@ public class App {
                                 JOptionPane.showMessageDialog(null, "Turma vazia!");
                             }else{
                                 try{
-                                    matricula = Integer.parseInt(JOptionPane.showInputDialog("Digite a matricula do aluno(a) que deseja modificar:"));
+                                    matriculaInput = JOptionPane.showInputDialog("Digite a matricula do aluno(a) que deseja modificar:");
+                                    if(matriculaInput == null ){
+                                        break;
+                                    }
+                                    matricula = Integer.parseInt(matriculaInput);
                                     aluno = minhaTurma.buscarAluno(matricula);
-                                    if(aluno == null){
+                                    if(aluno == null ){
                                         continue;
                                     }
                                     boolean atualizar = true;

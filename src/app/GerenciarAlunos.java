@@ -4,7 +4,6 @@ import javax.swing.JOptionPane;
 /**
  * Gerencia operações sobre a turma de alunos (cadastrar, buscar, listar, remover e atualizar).
  * @author Artur Saraiva Rabelo (asr.engsoft@gmail.com)
- * @version 1.4.3
  * @since 2025-11-02
  */
 
