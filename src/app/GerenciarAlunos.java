@@ -1,5 +1,4 @@
 package app;
-import javax.swing.JOptionPane;
 
 /**
  * Gerencia operações sobre a turma de alunos (cadastrar, buscar, listar, remover e atualizar).
@@ -39,7 +38,7 @@ public class GerenciarAlunos {
         id++;
     }
 
-    public void listarAlunos() {
+    public String listarAlunos() {
         String listados = "<html>";
         for(int i = 0; i < this.id; i++) {
             if(this.turma[i] != null) {
@@ -47,14 +46,13 @@ public class GerenciarAlunos {
             }
         }
         listados += "</html>";
-        JOptionPane.showMessageDialog(null, listados);
+        return listados;
     }
 
     public Aluno buscarAluno(int matricula) {
         Aluno busca;
         if(matricula < 100000 || matricula > 999999) {
-            JOptionPane.showMessageDialog(null, "Matricula invalida!");
-            return null;
+            throw new IllegalArgumentException("Matrícula inválida!");
         }
         for(int i = 0; i < this.id; i++) {
             if(this.turma[i].getMatricula() == matricula) {
@@ -62,7 +60,6 @@ public class GerenciarAlunos {
                 return busca;
             }
         }
-        JOptionPane.showMessageDialog(null, "Aluno nao encontrado!");
         return null;
     }
 

@@ -125,11 +125,12 @@ public class App {
                                     matricula = Integer.parseInt(matriculaInput);
                                     aluno = minhaTurma.buscarAluno(matricula);
                                     if(aluno == null){
+                                        JOptionPane.showMessageDialog(null, "Aluno nao encontrado!");
                                         continue;
                                     }
                                     mensagem = "<html>" + aluno.toString() + "</html>";
                                     JOptionPane.showMessageDialog(null, mensagem);
-                                } catch(NumberFormatException e) {
+                                } catch(IllegalArgumentException e) {
                                     JOptionPane.showMessageDialog(null, "Matricula invalida!");
                                 }
                             }
@@ -139,7 +140,8 @@ public class App {
                             if(minhaTurma.getId() == 0){
                                 JOptionPane.showMessageDialog(null, "Turma vazia!");
                             }else{
-                                minhaTurma.listarAlunos();
+                                mensagem = minhaTurma.listarAlunos();
+                                JOptionPane.showMessageDialog(null, mensagem);
                             }
                             break;
 
