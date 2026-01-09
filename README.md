@@ -7,7 +7,7 @@
 
 ## Sobre o Projeto
 
-O projeto foi o trabalho final para a disciplina de Programação Orientada a Objetos, ministrada pelo Prof. Dr. Mayrton Dias de Queiroz.
+O projeto foi um trabalho para a disciplina de Programação Orientada a Objetos, ministrada pelo Prof. Dr. Mayrton Dias de Queiroz.
 
  Ele simula um sistema básico para gerenciar uma turma de alunos, permitindo operações de cadastro, consulta, atualização e exclusão, além de gerar relatórios simples sobre o desempenho da turma.
 
